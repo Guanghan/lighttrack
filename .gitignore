@@ -1,0 +1,10 @@
+*.ckpt*
+*.pt
+*.so
+*.pyc
+*.json
+*.tgz
+*.zip
+*.weights
+*.DS_Store
+delete_for_now/
