@@ -400,3 +400,6 @@ Also consider citing the following works if you use CPN101/MSRA152 models:
 
 ## Contact
 For questions about our paper or code, please contact [Guanghan Ning](mailto:guanghan.ning@gmail.com).
+
+## Credits
+LOGO by: Hogen
