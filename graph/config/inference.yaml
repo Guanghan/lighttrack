@@ -1,0 +1,14 @@
+weights: ./graph/GCN/epoch210_model.pt
+
+# model
+model: graph.gcn_utils.gcn_model.Model
+model_args:
+  in_channels: 2
+  num_class: 128 # output feature dimension
+  edge_importance_weighting: True
+  graph_args:
+    layout: 'PoseTrack'
+    strategy: 'spatial'
+
+# testing
+device: [0]

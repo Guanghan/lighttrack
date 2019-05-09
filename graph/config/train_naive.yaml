@@ -1,0 +1,32 @@
+work_dir: /root/CPN/graph/
+
+# feeder
+feeder: utils.feeder.Feeder
+train_feeder_args:
+  data_path: ./unit_test/posetrack_train_data.pickle
+  data_neg_path: ./unit_test/posetrack_train_data_negative.pickle
+
+test_feeder_args:
+  data_path: ./unit_test/posetrack_val_data.pickle
+  data_neg_path: ./unit_test/posetrack_val_data_negative.pickle
+  #data_neg_path: ./unit_test/posetrack_val_data_hard_neg.pickle
+
+# model
+model: utils.naive_model.Model
+model_args:
+  in_channels: 2
+  num_class: 128  # output feature dimension
+  edge_importance_weighting: True
+  graph_args:
+    layout: 'PoseTrack'
+    strategy: 'spatial'
+
+# training
+device: [0,1,2,3]
+batch_size: 32
+test_batch_size: 1
+
+#optim
+base_lr: 0.001
+step: [40, 60, 100, 150]
+num_epoch: 300
