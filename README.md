@@ -5,6 +5,7 @@
 ## LightTrack: A Generic Framework for Online Top-Down Human Pose Tracking
 
 [[Project Page](http://guanghan.info/projects/LightTrack)] [[Paper](https://arxiv.org/pdf/1905.02822.pdf)] [[Github](http://github.com/Guanghan/lighttrack)]
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/lighttrack-a-generic-framework-for-online-top/pose-tracking-on-posetrack2017)](https://paperswithcode.com/sota/pose-tracking-on-posetrack2017?p=lighttrack-a-generic-framework-for-online-top)
 
 
 **With the provided code, you can easily:**
@@ -342,7 +343,7 @@ In order to perform ablation studies on the pose matching module, the simplest w
 Currently, the LightTrack framework does not handle well the identity switch/lose in occlusion scenarios, which is due to several reasons:
 (1) only one frame history is considered during data association;
 (2) only skeleton-based features are used.
-However, these problems are not naturally drawbacks of the LightTrack framework.
+However, these problems are not natural drawbacks of the LightTrack framework.
 In future research, spatiotemporal pose matching can be further explored to mitigate the occlusion problem. A longer history of poses might improve the performance; a combination of visual features and skeleton-based features may further contribute to the robustness of the data association module.
 
 ## Citation
