@@ -3,7 +3,7 @@
     E-mail: guanghan.ning@jd.com
     April 23rd, 2019
     LightTrack: A Generic Framework for Online Top-Down Human Pose Tracking
-    Demo on videos using YOLOv3 detector and CPN50.
+    Demo on videos using YOLOv3 detector and Mobilenetv1-Deconv.
 '''
 import time
 import argparse
@@ -373,20 +373,6 @@ def get_pose_matching_score(keypoints_A, keypoints_B, bbox_A, bbox_B):
     return dist
 
 
-def find_target(bbox_dets_list, iou_scores_list):
-    if iou_scores_list == []:
-        flag_target_found = False
-        bbox_det_index = 0
-    else:
-        bbox_det_index = iou_scores_list.index(max(iou_scores_list))
-
-        if iou_scores_list[bbox_det_index] >= 0.3:
-            flag_target_found = True
-        else:
-            flag_target_found = False
-
-    return  flag_target_found, bbox_det_index
-
 
 def get_iou_score(bbox_gt, bbox_det):
     boxA = xywh_to_x1y1x2y2(bbox_gt)
@@ -442,60 +428,6 @@ def iou(boxA, boxB):
 
     # return the intersection over union value
     return iou
-
-
-def load_gt_dets_mot(json_folder_input_path):
-    ''' load all detections in a video by reading json folder'''
-    if json_folder_input_path.endswith(".json"):
-        json_file_path = json_folder_input_path
-        dets_standard = read_json_from_file(json_file_path)
-    else:
-        dets_standard = batch_read_json(json_folder_input_path)
-
-    print("Using detection threshold: ", args.bbox_thresh)
-    dets = standard_to_dicts(dets_standard, bbox_thresh = args.bbox_thresh)
-
-    print("Number of imgs: {}".format(len(dets)))
-    return dets
-
-
-def batch_read_json(json_folder_path):
-    json_paths = get_immediate_childfile_paths(json_folder_path, ext=".json")
-
-    dets = []
-    for json_path in json_paths:
-        python_data = read_json_from_file(json_path)
-        dets.append(python_data)
-    return dets
-
-
-def standard_to_dicts(dets_standard, bbox_thresh = 0):
-    # standard detection format to CPN detection format
-    num_dets = len(dets_standard)
-    dets_CPN_list = []
-    for i in range(num_dets):
-        det_standard = dets_standard[i]
-        num_candidates = len(det_standard['candidates'])
-
-        dets_CPN = []
-        for j in range(num_candidates):
-            det = {}
-            det['image_id'] = det_standard['image']['id']
-            det['bbox'] = det_standard['candidates'][j]['det_bbox']
-            det['bbox_score'] = det_standard['candidates'][j]['det_score']
-            det['imgpath'] = os.path.join(det_standard['image']['folder'], det_standard['image']['name'])
-            if det['bbox_score'] >= bbox_thresh:
-                dets_CPN.append(det)
-        dets_CPN_list.append(dets_CPN)
-    return dets_CPN_list
-
-
-def get_bbox_from_gt(python_data_gt_dets, img_id, det_id):
-    # get box detections
-    det = np.zeros((1, 4), dtype=np.float32)
-    bbox = np.asarray(python_data_gt_dets[img_id][det_id]['bbox'])
-    det[0, :4] = np.array([bbox[0], bbox[1], bbox[2], bbox[3]])
-    return det[0].tolist()
 
 
 def get_bbox_from_keypoints(keypoints_python_data):
@@ -591,7 +523,7 @@ def get_pose_from_bbox(pose_estimator, test_data, cfg):
     cls_skeleton = np.zeros((len(test_data), cfg.nr_skeleton, 3))
     crops = np.zeros((len(test_data), 4))
 
-    batch_size = 32
+    batch_size = 1
     start_id = 0
     end_id = min(len(test_data), batch_size)
 
@@ -767,30 +699,6 @@ def xywh_to_x1y1x2y2(det):
     x1, y1, w, h = det
     x2, y2 = x1 + w, y1 + h
     return [x1, y1, x2, y2]
-
-
-def next_img_path(img_path):
-    folder_path, img_name = os.path.split(img_path)
-    img_name_no_ext =  img_name.split(".")[0]
-    img_ext = img_name.split(".")[1]
-
-    img_id = int(img_name_no_ext)
-    next_img_id = img_id + 1
-
-    if next_img_id <= 9:
-        num_zeros = 5
-    elif next_img_id <= 99:
-        num_zeros = 4
-    else:
-        num_zeros = 3
-    next_img_name = ""
-    for i in range(num_zeros):
-        next_img_name += "0"
-    next_img_name += str(next_img_id)
-    next_img_name += "."
-    next_img_name += img_ext
-    next_img_path = os.path.join(folder_path, next_img_name)
-    return next_img_path
 
 
 def bbox_invalid(bbox):
