@@ -12,7 +12,7 @@ from detection_visualizer import *
 sys.path.append(os.path.abspath("../keypoint_to_standard/"))
 from keypoint_visualizer import *
 
-draw_threshold = 0.85
+draw_threshold = 0.4
 
 def show_all_from_standard_json(json_file_path, classes, joint_pairs, joint_names, img_folder_path = None, output_folder_path = None, flag_track= False):
     # Visualizing: Detection + Pose Estimation
