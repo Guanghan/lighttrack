@@ -51,19 +51,26 @@ Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 imgs = []  # Stores image paths
 img_detections = []  # Stores detections for each image index
 
+
 def inference_yolov3(img_path):
     img = np.array(Image.open(img_path))
+    return inference_yolov3_from_img(img)
+
+
+def inference_yolov3_from_img(img):
     input_img = preprocess_img_for_yolo(img)
 
     # Configure input
     input_img = Variable(input_img.type(Tensor))
-    #if cuda:
-    #    input_img = input_img.cuda()
 
     # Get detections
     with torch.no_grad():
         detections = model(input_img)
-        detections = non_max_suppression(detections, opt.conf_thres, opt.nms_thres)[0].data.cpu().numpy()
+        detections = non_max_suppression(detections, opt.conf_thres, opt.nms_thres)[0]
+        if detections is None:
+            return []
+        else:
+            detections = detections.data.cpu().numpy()
 
     # The amount of padding that was added
     pad_x = max(img.shape[0] - img.shape[1], 0) * (opt.img_size / max(img.shape))
