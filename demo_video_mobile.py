@@ -120,6 +120,29 @@ def light_track(pose_estimator,
             num_dets = len(human_candidates)
             print("Keyframe: {} detections".format(num_dets))
 
+            # if nothing detected at keyframe, regard next frame as keyframe because there is nothing to track
+            if num_dets <= 0:
+                # add empty result
+                bbox_det_dict = {"img_id":img_id,
+                                 "det_id":  0,
+                                 "track_id": -1,
+                                 "imgpath": img_path,
+                                 "bbox": [0, 0, 2, 2]}
+                bbox_dets_list.append(bbox_det_dict)
+
+                keypoints_dict = {"img_id":img_id,
+                                  "det_id": 0,
+                                  "track_id": -1,
+                                  "imgpath": img_path,
+                                  "keypoints": []}
+                keypoints_list.append(keypoints_dict)
+
+                bbox_dets_list_list.append(bbox_dets_list)
+                keypoints_list_list.append(keypoints_list)
+
+                flag_mandatory_keyframe = True
+                continue
+
             ''' 2. statistics: get total number of detected persons '''
             total_num_PERSONS += num_dets
 
@@ -255,6 +278,7 @@ def light_track(pose_estimator,
                     flag_mandatory_keyframe = True
 
                     total_num_PERSONS -= 1
+                    ## Re-process this frame by treating it as a keyframe
                     if img_id not in [0]:
                         img_id -= 1
                     break
