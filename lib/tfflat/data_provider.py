@@ -14,6 +14,7 @@ from itertools import cycle
 from copy import copy
 from .utils import get_rng
 from setproctitle import setproctitle
+import pprint, logger
 
 def del_weakref(x):
     o = x()
@@ -369,4 +370,3 @@ class BatchData(object):
 
     def reset_state(self):
         self.ds.reset_state()
-

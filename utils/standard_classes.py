@@ -5,6 +5,7 @@
 
     OpenSVAI standard format
 '''
+from utils_json import python_to_json, write_json_to_file
 
 class StandardData():
     def __init__(self):
@@ -61,7 +62,7 @@ class StandardCandidate():
     def add_det_category(self, det_category):
         self.candidate["det_category"] = det_category
 
-    def add_pose_order(self, pose_oder):
+    def add_pose_order(self, pose_order):
         self.candidate["pose_order"] = pose_order
 
     def add_pose_keypoints_2d(self, pose_keypoints_2d):

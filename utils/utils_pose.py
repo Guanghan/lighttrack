@@ -194,7 +194,7 @@ def extract_heatmaps(network_output, heatmap_layer_name):
 ''' --------------------------Demo Detections--------------------------------'''
 def demo_heatmaps(heatmaps, joint_names):
     for ith_map, heatmap in enumerate(heatmaps):
-	draw_heatmap(heatmap, joint_names[ith_map])
+        draw_heatmap(heatmap, joint_names[ith_map])
 
 
 def draw_heatmap(heatmap, joint_name):

@@ -87,16 +87,6 @@ def video_to_images(video_file_path, output_img_folder_path = None):
         count += 1
     return True
 
-
-def count_lead_and_trail_zeroes(d):
-    """Count the number of leading and trailing zeroes in an integer."""
-    b = "{:064b}".format(d)
-    try:
-        return as_str.index("1"), 63 - as_str.rindex("1")
-    except ValueError:
-        return 64, 64
-
-
 def count_lead_and_trail_zeroes(d):
     # https://graphics.stanford.edu/~seander/bithacks.html#ZerosOnRightLinear
     if d:

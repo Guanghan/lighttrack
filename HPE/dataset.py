@@ -6,23 +6,6 @@ import random
 import time
 
 
-def get_seg(height, width, seg_ann):
-    label = np.zeros((height, width, 1))
-    if type(seg_ann) == list:
-        for s in seg_ann:
-            poly = np.array(s, np.int).reshape(len(s) // 2, 2)
-            cv2.fillPoly(label, [poly], 1)
-    else:
-        if type(seg_ann['counts']) == list:
-            rle = mask.frPyObjects([seg_ann], label.shape[0], label.shape[1])
-        else:
-            rle = [seg_ann]
-        # we set the ground truth as one-hot
-        m = mask.decode(rle) * 1
-        label[label == 0] = m[label == 0]
-    return label[:, :, 0]
-
-
 def data_augmentation(trainData, trainLabel, trainValids, segms=None):
     trainSegms = segms
     tremNum = cfg.nr_aug - 1
@@ -226,13 +209,6 @@ def Preprocessing(d, stage='train'):
 
     if stage != 'train':
         details = np.asarray([min_x - add, min_y - add, max_x - add, max_y - add])
-
-    if cfg.use_seg is True and 'segmentation' in d:
-        seg = get_seg(ori_img.shape[0], ori_img.shape[1], d['segmentation'])
-        add = max(seg.shape[0], seg.shape[1])
-        bimg = cv2.copyMakeBorder(seg, add, add, add, add, borderType=cv2.BORDER_CONSTANT, value=(0, 0, 0))
-        seg = cv2.resize(bimg[min_y:max_y, min_x:max_x], (width, height))
-        segms.append(seg)
 
     if vis:
         tmpimg = img.copy()
