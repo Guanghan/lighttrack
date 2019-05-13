@@ -1,4 +1,4 @@
-weights: ./graph/GCN/epoch210_model.pt
+weights: ./weights/GCN/epoch210_model.pt
 
 # model
 model: graph.gcn_utils.gcn_model.Model
