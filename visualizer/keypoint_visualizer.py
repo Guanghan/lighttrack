@@ -102,10 +102,10 @@ def show_poses_from_standard_json(json_file_path, joint_pairs, joint_names, img_
             joints = reshape_keypoints_into_joints(pose_keypoints_2d)
             img = show_poses_from_python_data(img, joints, joint_pairs, joint_names)
 
-            if output_folder_path is not None:
-                create_folder(output_folder_path)
-                img_output_path = os.path.join(output_folder_path, python_data["image"]["name"])
-                cv2.imwrite(img_output_path, img)
+        if output_folder_path is not None:
+            create_folder(output_folder_path)
+            img_output_path = os.path.join(output_folder_path, python_data["image"]["name"])
+            cv2.imwrite(img_output_path, img)
     return
 
 

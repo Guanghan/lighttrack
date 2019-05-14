@@ -54,10 +54,10 @@ def show_all_from_standard_json(json_file_path, classes, joint_pairs, joint_name
             else:
                 img = show_poses_from_python_data(img, joints, joint_pairs, joint_names)
 
-            if output_folder_path is not None:
-                create_folder(output_folder_path)
-                img_output_path = os.path.join(output_folder_path, python_data["image"]["name"])
-                cv2.imwrite(img_output_path, img)
+        if output_folder_path is not None:
+            create_folder(output_folder_path)
+            img_output_path = os.path.join(output_folder_path, python_data["image"]["name"])
+            cv2.imwrite(img_output_path, img)
     return
 
 
@@ -96,7 +96,8 @@ def make_video_from_images(img_paths, outvid_path, fps=25, size=None,
         if size[0] != img.shape[1] and size[1] != img.shape[0]:
             img = resize(img, size)
         vid.write(img)
-    vid.release()
+    if vid is not None:
+        vid.release()
     return vid
 
 
