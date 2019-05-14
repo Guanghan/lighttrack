@@ -58,10 +58,10 @@ def initialize_parameters():
     global keyframe_interval, enlarge_scale, pose_matching_threshold
     keyframe_interval = 10 # choice examples: [2, 3, 5, 8, 10]
     enlarge_scale = 0.2
-    pose_matching_threshold = 1.0
+    pose_matching_threshold = 0
 
     global flag_flip
-    flag_flip = False
+    flag_flip = True
 
     global total_time_POSE, total_time_DET, total_time_ALL, total_num_FRAMES, total_num_PERSONS
     total_time_POSE = 0
@@ -395,16 +395,6 @@ def get_pose_matching_score(keypoints_A, keypoints_B, bbox_A, bbox_B):
     flag_match, dist = pose_matching(data_A, data_B)
     end = time.time()
     return dist
-
-
-
-def get_iou_score(bbox_gt, bbox_det):
-    boxA = xywh_to_x1y1x2y2(bbox_gt)
-    boxB = xywh_to_x1y1x2y2(bbox_det)
-
-    iou_score = iou(boxA, boxB)
-    #print("iou_score: ", iou_score)
-    return iou_score
 
 
 def is_target_lost(keypoints, method="max_average"):
