@@ -116,7 +116,7 @@ def show_poses_from_python_data(img, joints, joint_pairs, joint_names, flag_demo
         img = add_joint_connections_to_image(img, joints, joint_pairs, joint_names)
     else:  # do pose tracking visualization
         candidate_joint_pairs = joint_pairs.copy()
-        color_name = color_list[track_id % 6]
+        color_name = color_list[track_id % 13]
         for i in range(len(candidate_joint_pairs)):   candidate_joint_pairs[i][2] = color_name
         img = add_joint_connections_to_image(img, joints, candidate_joint_pairs, joint_names)
 
