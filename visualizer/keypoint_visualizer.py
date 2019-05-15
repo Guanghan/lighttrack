@@ -14,7 +14,7 @@ from utils_io_folder import create_folder
 from utils_json import read_json_from_file
 
 flag_color_sticks = True
-flag_only_draw_sure = True
+flag_only_draw_sure = False
 #keypoints_mode = "COCO"
 keypoints_mode = "PoseTrack"
 

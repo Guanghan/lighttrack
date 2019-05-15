@@ -159,6 +159,7 @@ def light_track(pose_estimator,
                 bbox_det = bbox_gt
                 if bbox_det[2] <= 0 or bbox_det[3] <= 0 or bbox_det[2] > 2000 or bbox_det[3] > 2000:
                     bbox_det = [0, 0, 2, 2]
+                    track_id = None  # this id means null
                     continue
 
                 # update current frame bbox
@@ -178,7 +179,7 @@ def light_track(pose_estimator,
                     next_id += 1
                 else:
                     track_id = get_track_id_SpatialConsistency(bbox_gt, bbox_dets_list_list, img_id)
-                    if track_id == -1:
+                    if track_id == -1: # this id means not found
                         track_id = get_track_id_SGCN(bbox_gt, bbox_dets_list_list, keypoints_gt, keypoints_list_list, img_id)
 
                     if track_id == -1 and not bbox_invalid(bbox_det):
@@ -186,8 +187,9 @@ def light_track(pose_estimator,
                         next_id += 1
 
                 if bbox_invalid(bbox_det):
-                    track_id = -1
+                    track_id = None # this id means null
                     keypoints = []
+                    continue
 
                 # update current frame bbox
                 bbox_det_dict = {"img_id":img_id,
