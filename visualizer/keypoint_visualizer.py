@@ -14,7 +14,6 @@ from utils_io_folder import create_folder
 from utils_json import read_json_from_file
 
 flag_color_sticks = True
-flag_only_draw_sure = False
 #keypoints_mode = "COCO"
 keypoints_mode = "PoseTrack"
 
@@ -109,7 +108,7 @@ def show_poses_from_standard_json(json_file_path, joint_pairs, joint_names, img_
     return
 
 
-def show_poses_from_python_data(img, joints, joint_pairs, joint_names, flag_demo_poses = False, track_id = -1):
+def show_poses_from_python_data(img, joints, joint_pairs, joint_names, flag_demo_poses = False, track_id = -1, flag_only_draw_sure=False):
     img = add_joints_to_image(img, joints)
 
     if track_id == -1: # do pose estimation visualization
@@ -118,7 +117,7 @@ def show_poses_from_python_data(img, joints, joint_pairs, joint_names, flag_demo
         candidate_joint_pairs = joint_pairs.copy()
         color_name = color_list[track_id % 13]
         for i in range(len(candidate_joint_pairs)):   candidate_joint_pairs[i][2] = color_name
-        img = add_joint_connections_to_image(img, joints, candidate_joint_pairs, joint_names)
+        img = add_joint_connections_to_image(img, joints, candidate_joint_pairs, joint_names, flag_only_draw_sure)
 
     if flag_demo_poses is True:
         cv2.imshow("pose image", img)
@@ -134,7 +133,7 @@ def add_joints_to_image(img_demo, joints):
     return img_demo
 
 
-def add_joint_connections_to_image(img_demo, joints, joint_pairs, joint_names):
+def add_joint_connections_to_image(img_demo, joints, joint_pairs, joint_names, flag_only_draw_sure = False):
     for joint_pair in joint_pairs:
         ind_1 = joint_names.index(joint_pair[0])
         ind_2 = joint_names.index(joint_pair[1])
@@ -151,7 +150,7 @@ def add_joint_connections_to_image(img_demo, joints, joint_pairs, joint_names):
 
         if flag_only_draw_sure is False:
             sure1 = sure2 = 1
-        if sure1 > 0.5 and sure2 > 0.5:
+        if sure1 > 0.8 or sure2 > 0.8:
             #cv2.line(img_demo, (x1, y1), (x2, y2), color, thickness=8)
             cv2.line(img_demo, (x1, y1), (x2, y2), color, thickness=4)
     return img_demo

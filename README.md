@@ -4,6 +4,8 @@
 
 ## LightTrack: A Generic Framework for Online Top-Down Human Pose Tracking
 
+### Update 5/16/2019: Add Camera Demo
+
 [[Project Page](http://guanghan.info/projects/LightTrack)] [[Paper](https://arxiv.org/pdf/1905.02822.pdf)] [[Github](http://github.com/Guanghan/lighttrack)]
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/lighttrack-a-generic-framework-for-online-top/pose-tracking-on-posetrack2017)](https://paperswithcode.com/sota/pose-tracking-on-posetrack2017?p=lighttrack-a-generic-framework-for-online-top)
 
@@ -23,6 +25,7 @@ For more technical details, please refer to our arXiv paper.
   * [Overview](#overview)
   * [Prerequisites](#Prerequisites)
   * [Getting Started](#getting-started)
+    * [Demo on Live Camera](#Demo-on-Live-Camera)
     * [Demo on Arbitrary Videos](#Demo-on-Arbitrary-Videos)
     * [Validate on PoseTrack 2018](#validate-on-posetrack-2018)
     * [Evaluation on PoseTrack 2018](#evaluation-on-posetrack-2018)
@@ -106,14 +109,11 @@ Below is a simple step-by-step explanation of how the LightTrack framework works
    sh data/download_posetrack18.sh
    ```
 
-### Demo on Arbitrary Videos
-
+### Demo on Live Camera
 
 | PoseTracking Framework | Keyframe Detector | Keyframe ReID Module | Pose Estimator | FPS |
 |:----------:|:-----------:|:--------------:|:----------------:|:---------:|
 | LightTrack | YOLOv3 | Siamese GCN | MobileNetv1-Deconv | 220* / 15 |
-
-[| LightTrack | YOLOv3 | Siamese GCN | Resnet152-Deconv |    - / -    |]: #
 
  - Download weights.
    ```Shell
@@ -121,6 +121,23 @@ Below is a simple step-by-step explanation of how the LightTrack framework works
    bash ./download_weights.sh  # download weights for backbones (only for training), detectors, pose estimators, pose matcher, etc.
    cd -;
    ```
+
+ - Perform pose tracking demo on your Webcam.
+   ```Shell
+   # access virtual environment
+   source activate py36;
+
+   # Perform LightTrack demo (on camera) with light-weight detector and pose estimator
+   python demo_camera_mobile.py
+   ```
+
+
+### Demo on Arbitrary Videos
+
+
+| PoseTracking Framework | Keyframe Detector | Keyframe ReID Module | Pose Estimator | FPS |
+|:----------:|:-----------:|:--------------:|:----------------:|:---------:|
+| LightTrack | YOLOv3 | Siamese GCN | MobileNetv1-Deconv | 220* / 15 |
 
  - Download demo video.
    ```Shell

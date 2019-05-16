@@ -140,7 +140,7 @@ def joints_heatmap_gen(data, label, tar_size=cfg.output_shape, ori_size=cfg.data
     else:
         return ret
 
-def Preprocessing(d, stage='train'):
+def Preprocessing(d, raw_img = None, stage='train'):
     height, width = cfg.data_shape
     imgs = []
     labels = []
@@ -150,12 +150,16 @@ def Preprocessing(d, stage='train'):
 
     vis = False
     #vis = True
-    #img = cv2.imread(os.path.join(cfg.img_path, d['imgpath']))
-    img = cv2.imread(os.path.join(d['imgpath']))
-    #hack(multiprocessing data provider)
-    while img is None:
-        time.sleep(np.random.rand() * 5)
-        img = cv2.imread(os.path.join(cfg.img_path, d['imgpath']))
+
+    if raw_img is None:
+        #img = cv2.imread(os.path.join(cfg.img_path, d['imgpath']))
+        img = cv2.imread(os.path.join(d['imgpath']))
+        while img is None:
+            time.sleep(np.random.rand() * 5)
+            img = cv2.imread(os.path.join(cfg.img_path, d['imgpath']))
+    else:
+        img = raw_img
+
     add = max(img.shape[0], img.shape[1])
     bimg = cv2.copyMakeBorder(img, add, add, add, add, borderType=cv2.BORDER_CONSTANT,
                               value=cfg.pixel_means.reshape(-1))
