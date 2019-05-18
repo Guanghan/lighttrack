@@ -11,13 +11,15 @@
 
 
 **With the provided code, you can easily:**
+- **Perform online pose tracking on live webcam.**
 - **Perform online pose tracking on arbitrary videos.**
 - **Replicate ablation study experiments on PoseTrack'18 Validation Set.**
 - **Train models on your own.**
 - **Replace pose estimators or improve data association modules for future research.**
 
-For more technical details, please refer to our arXiv paper.
 
+#### Real-life Application Scenarios:
+- [Surveillance](https://youtu.be/P9Bzs3cSF-w) / [Sport analytics](https://youtu.be/PZVGYmr7Ryk) / Security / Self-driving / Selfie video / Short videos (Douyin, Tiktok, etc.)
 
 ## Table of Contents
 - [LightTrack](#LightTrack)
@@ -29,6 +31,7 @@ For more technical details, please refer to our arXiv paper.
     * [Demo on Arbitrary Videos](#Demo-on-Arbitrary-Videos)
     * [Validate on PoseTrack 2018](#validate-on-posetrack-2018)
     * [Evaluation on PoseTrack 2018](#evaluation-on-posetrack-2018)
+  * [Qualitative Results](#qualitative-results-on-posetrack)
   * [Quantitative Results](#quantitative-results-on-posetrack)
     * [Performance on PoseTrack 2017 Benchmark (Test Set)](#quantitative-results-on-posetrack)
   * [Training](#training)
@@ -71,6 +74,8 @@ Below is a simple step-by-step explanation of how the LightTrack framework works
 (3). Detection at every other 10 Frames for multi-person:
 * At non-keyframes, IDs are naturally kept for each person;
 * At keyframes, IDs are associated via spatial consistency.
+
+For more technical details, please refer to our arXiv paper.
 
 ## Prerequisites
  - Set up a Python3 environment with provided anaconda environment file.
@@ -279,9 +284,27 @@ For FPS, * means excluding pose inference time. Our LightTrack in true online mo
 
 
 
-## Qualitative Results on PoseTrack
+## Qualitative Results
 Some [gifs](https://www.reddit.com/r/gifs/) exhibiting qualitative results:
+
+
+- (1) PoseTrack test sequence
+
+| PoseTracking Framework | Keyframe Detector | Keyframe ReID Module | Pose Estimator |
+|:----------:|:-----------:|:--------------:|:----------------:|
+| LightTrack | Deformable FPN (heavy) | Siamese GCN | MSRA152 (heavy) |
+
 ![Demo 1](demo/demo_big.gif)
+
+
+- (2) Potential Applications (Surveillance, Sport Analytics, etc.)
+
+| PoseTracking Framework | Keyframe Detector | Keyframe ReID Module | Pose Estimator |
+|:----------:|:-----------:|:--------------:|:----------------:|
+| LightTrack | YOLOv3 (light) | Siamese GCN | MobileNetv1-Deconv (light) |
+
+![Demo 2](demo/surveillance.gif)
+![Demo 3](demo/sport-analytics.gif)
 
 
 ## Quantitative Results on PoseTrack
