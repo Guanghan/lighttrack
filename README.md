@@ -347,6 +347,11 @@ python train_PoseTrack_COCO_17_mobile_deconv.py -d 0-3 -c  # Train MobileNetv1-D
  - Run the training commands below.
 
 ```Shell
+# Download training and validation data
+cd graph/unit_test;
+bash download_data.sh;
+cd -;
+
 # Train the siamese graph convolutional network
 cd graph;
 python main.py processor_siamese_gcn -c config/train.yaml
