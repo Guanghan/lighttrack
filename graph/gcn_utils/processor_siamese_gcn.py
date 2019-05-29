@@ -168,8 +168,8 @@ class SGCN_Processor(Processor):
             self.show_epoch_info()
 
             #print(result_frag)
-            print(label_frag[0:20])
-            print(pred_label_frag[0:20])
+            #print(label_frag[0:20])
+            #print(pred_label_frag[0:20])
 
             # show accuracy
             accuracy = calculate_accuracy(label_frag, pred_label_frag)
