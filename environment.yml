@@ -4,6 +4,7 @@ channels:
   - anaconda
   - defaults
 dependencies:
+  - cython=0.28.5
   - _tflow_180_select=1.0=gpu
   - absl-py=0.2.2=py36_0
   - astor=0.6.2=py36_0
@@ -74,11 +75,11 @@ dependencies:
   - jpeg=9b=2
   - kiwisolver=1.0.1=py36_1
   - libpng=1.6.34=0
-  - libtiff=4.0.9=0
-  - libuuid=1.0.3=1
+  - libtiff=4.0.9
+  - libuuid=1.0.3
   - libwebp=0.5.2=7
   - libxcb=1.13=0
-  - matplotlib=2.2.2=py36_1
+  - matplotlib=2.2.2
   - openblas=0.2.20=8
   - openssl=1.0.2o=0
   - pcre=8.41=1
@@ -123,9 +124,7 @@ dependencies:
     - tabulate==0.8.2
     - toolz==0.9.0
     - torch==1.0.1.post2
-    - torchlight==1.0
     - torchvision==0.2.2.post3
     - tqdm==4.23.4
     - zope.interface==4.5.0
 prefix: /root/anaconda2/envs/py36
-
