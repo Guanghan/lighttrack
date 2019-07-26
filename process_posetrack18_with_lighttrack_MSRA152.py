@@ -40,7 +40,7 @@ flag_nms = False #Default is False, unless you know what you are doing
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', '-m', type=str, dest='test_model', default="weights/MSRA152/snapshot_285.ckpt")
+    parser.add_argument('--model', '-m', type=str, dest='test_model', default="weights/MSRA152/MSRA_snapshot_285.ckpt")
     parser.add_argument('--dataset_split', '-s', type=str, dest='dataset_split', default="posetrack18_val")
     parser.add_argument('--det_or_gt', '-e', type=str, dest='det_or_gt', default="det")
     args = parser.parse_args()
