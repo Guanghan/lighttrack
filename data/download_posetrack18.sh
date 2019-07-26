@@ -17,3 +17,4 @@ cat *.tar* | tar -xvf - -i;
 # (Only labels_v0.2 were available when we were conducting the ablation experiments; 
 # the values provided in the README.md are results of the 74 validation sequences.)
 wget https://posetrack.net/posetrack18-data/posetrack18_v0.2_public_labels.tar.gz
+tar xvzf posetrack18_v0.2_public_labels.tar.gz
