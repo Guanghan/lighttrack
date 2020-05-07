@@ -4,6 +4,10 @@
 
 ## LightTrack: A Generic Framework for Online Top-Down Human Pose Tracking
 
+### Update 4/19/2020: 
+
+Paper will appear in CVPR 2020 Workshop on [Towards Human-Centric Image/Video Synthesis and the 4th Look Into Person (LIP) Challenge](https://vuhcs.github.io/).
+
 ### Update 5/16/2019: Add Camera Demo
 
 [[Project Page](http://guanghan.info/projects/LightTrack)] [[Paper](https://arxiv.org/pdf/1905.02822.pdf)] [[Github](http://github.com/Guanghan/lighttrack)]
@@ -397,8 +401,8 @@ If you find LightTrack helpful or use this framework in your work, please consid
 @article{ning2019lighttrack,
   author    = {Ning, Guanghan and Huang, Heng},
   title     = {LightTrack: A Generic Framework for Online Top-Down Human Pose Tracking,
-  journal   = {arXiv preprint arXiv:1905.02822},
-  year      = {2019},
+  journal   = {Proceedings of CVPRW 2020 on Towards Human-Centric Image/Video Synthesis and the 4th Look Into Person (LIP) Challenge},
+  year      = {2020},
 }
 ```
 
